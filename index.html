@@ -555,9 +555,13 @@
       display: flex; gap: 0;
       animation: marqueeScroll 28s linear infinite;
       width: max-content;
+      will-change: transform;
     }
     .marquee-track:hover { animation-play-state: paused; }
-    @keyframes marqueeScroll { from{transform:translateX(0);}to{transform:translateX(-50%);} }
+    @keyframes marqueeScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(var(--mq-shift, -50%)); }
+    }
     .marquee-item {
       display: flex; align-items: center; gap: 20px;
       padding: 0 48px;
@@ -1636,7 +1640,38 @@
       startTimer();
     })();
 
-    /* ── SCROLL PROGRESS BAR ── */
+    /* ── MARQUEE FILL ── */
+    (function(){
+      const track = document.getElementById('marqueeTrack');
+      if (!track) return;
+
+      // Snapshot the original children (14 items already in HTML)
+      const origItems = Array.from(track.children);
+      const origCount = origItems.length;
+
+      function init() {
+        // Remove any previously appended clones
+        while (track.children.length > origCount) track.lastChild.remove();
+
+        // Measure the width of the original set (all origCount items)
+        const setW = origItems.reduce((sum, el) => sum + el.offsetWidth, 0);
+        if (setW === 0) return;
+
+        // Clone the set until total content is at least 2.5× the viewport
+        let totalW = setW;
+        while (totalW < window.innerWidth * 2.5) {
+          origItems.forEach(el => track.appendChild(el.cloneNode(true)));
+          totalW += setW;
+        }
+
+        // Animate exactly one original-set width so the loop is seamless
+        track.style.setProperty('--mq-shift', `-${setW}px`);
+      }
+
+      // Run after fonts/layout settle, then on every resize
+      requestAnimationFrame(() => { requestAnimationFrame(init); });
+      window.addEventListener('resize', init);
+    })();
     (function(){
       const bar = document.createElement('div');
       bar.style.cssText = 'position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#4DFFF3,#1E7F7A);z-index:10000;width:0%;pointer-events:none;transition:width .08s linear;';
