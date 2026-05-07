@@ -2,15 +2,6 @@
 <html lang="en">
 
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2QR8PC099K"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-2QR8PC099K');
-</script>
   <meta charset="UTF-8" />
   <title>Services — Motion Media Circle</title>
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
@@ -1646,9 +1637,12 @@
     /* ═══════════════════════════════════════════
        SAFE AREA INSETS (notch / Dynamic Island)
     ═══════════════════════════════════════════ */
-    .header {
-      padding-left: max(60px, env(safe-area-inset-left));
-      padding-right: max(60px, env(safe-area-inset-right));
+    /* Safe-area on wide screens only (mobile overrides in media query already handle small padding) */
+    @media (min-width: 961px) {
+      .header {
+        padding-left: max(60px, env(safe-area-inset-left));
+        padding-right: max(60px, env(safe-area-inset-right));
+      }
     }
 
     .lb-close,
@@ -1817,9 +1811,8 @@
     }
 
     .client-card {
-      flex: 0 0 calc((100vw - 120px - 4 * 24px) / 5);
-      max-width: 260px;
-      min-width: 180px;
+      flex: 0 0 auto;
+      min-width: 140px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -1909,7 +1902,100 @@
     @media (max-width: 900px) {
       .clients-section { padding: 80px 0 100px; }
       .clients-head { padding: 0 28px; }
-      .client-card { flex: 0 0 72vw; max-width: 72vw; }
+    }
+
+    /* ═══════════════════════════════════════════
+       MEDIUM SCREENS  640 – 960 px
+    ═══════════════════════════════════════════ */
+    @media (min-width: 641px) and (max-width: 960px) {
+      /* Header */
+      .header,
+      .header.scrolled {
+        padding: 18px 32px;
+      }
+
+      .header-tabs {
+        display: none;
+      }
+
+      /* Hero */
+      .page-hero-inner {
+        padding: 80px 32px 60px;
+      }
+
+      /* Nav */
+      .service-nav-inner {
+        padding: 0 24px;
+      }
+
+      .snav-item {
+        padding: 16px 18px;
+      }
+
+      /* Sections */
+      .service-section {
+        padding: 72px 32px 88px;
+      }
+
+      .section-head {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+        margin-bottom: 48px;
+      }
+
+      /* Gallery grids — 2-column on medium */
+      .grid-a,
+      .grid-b,
+      .grid-c,
+      .grid-d,
+      .grid-e,
+      .grid-f,
+      .grid-g {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        gap: 14px;
+      }
+
+      .grid-a .gi:first-child,
+      .grid-b .gi:nth-child(2),
+      .grid-c .gi:first-child,
+      .grid-c .gi:nth-child(2),
+      .grid-c .gi:nth-child(3),
+      .grid-d .gi:first-child,
+      .grid-e .gi:first-child,
+      .grid-f .gi:first-child,
+      .grid-g .gi:nth-child(1),
+      .grid-g .gi:nth-child(6) {
+        grid-column: auto;
+        grid-row: auto;
+      }
+
+      /* Full-width first item for banner-style grids */
+      .grid-d .gi:first-child,
+      .grid-e .gi:first-child {
+        grid-column: 1 / -1;
+      }
+
+      .gi { height: 260px; }
+
+      /* Always show overlay on touch screens */
+      .gi-overlay {
+        opacity: 1;
+        background: linear-gradient(to top, rgba(8,15,24,.85) 0%, transparent 55%);
+      }
+      .gi-info { transform: translateY(0); }
+      .gi::before { width: 40px; }
+
+      /* CTA */
+      .cta-strip { padding: 88px 32px; }
+
+      /* Footer */
+      .footer {
+        padding: 40px 32px;
+      }
+
+      /* Clients */
+      .clients-head { padding: 0 32px; }
     }
 
   </style>
@@ -2909,8 +2995,21 @@
 
       /* ── Init & resize ── */
       function init() {
-        // Set track left padding so first card aligns to content edge
+        const vis = visibleCount();
         const sectionPad = window.innerWidth < 900 ? 28 : 60;
+
+        /* Calculate card width from the actual wrap width so cards
+           always fill the visible area exactly — no blank space. */
+        const wrapW = wrap.offsetWidth || window.innerWidth;
+        const totalGaps = (vis - 1) * GAP;
+        const cw = Math.floor((wrapW - sectionPad * 2 - totalGaps) / vis);
+
+        /* Push width onto every card so CSS calc / max-width can't interfere */
+        cards.forEach(c => {
+          c.style.flex  = `0 0 ${cw}px`;
+          c.style.width = `${cw}px`;
+        });
+
         track.style.paddingLeft  = sectionPad + 'px';
         track.style.paddingRight = sectionPad + 'px';
         buildDots();
