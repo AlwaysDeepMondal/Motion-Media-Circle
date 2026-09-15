@@ -393,7 +393,7 @@
 
     /* STATS */
     .stats-strip{padding:80px 56px;border-top:1px solid rgba(77,255,243,.07);border-bottom:1px solid rgba(77,255,243,.07);background:rgba(13,30,46,.4);}
-    .stats-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:40px;text-align:center;}
+    .stats-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:40px;text-align:center;}
     .stat-num{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:300;color:var(--aqua);line-height:1;margin-bottom:8px;}
     .stat-label{font-size:12px;letter-spacing:.14em;opacity:.6;}
 
@@ -454,7 +454,7 @@
       .showcase-grid{grid-template-columns:1fr;grid-template-rows:auto;}
       .showcase-item:first-child{grid-row:auto;}
       .showcase-item{height:220px;}
-      .stats-inner{grid-template-columns:repeat(2,1fr);gap:32px;}
+      .stats-inner{grid-template-columns:repeat(3,1fr);gap:32px;}
       .stats-strip{padding:60px 20px;}
       .footer{padding:48px 20px 0;}
       .footer-inner{flex-direction:column;gap:28px;}
@@ -640,7 +640,7 @@
       .hero-title{font-size:clamp(36px,10vw,54px);}
       .services-section,.about-section,.contact-section{padding:80px 16px;}
       .stats-strip{padding:48px 16px;}
-      .stats-inner{gap:24px;}
+      .stats-inner{grid-template-columns:1fr;gap:24px;}
       .stat-num{font-size:38px;}
       .footer{padding:40px 16px 0;}
       .showcase-item{height:180px;}
@@ -1115,10 +1115,6 @@
       <div class="stat-item reveal delay-2">
         <div class="stat-num" data-count="5">0</div>
         <div class="stat-label">Years of Experience</div>
-      </div>
-      <div class="stat-item reveal delay-3">
-        <div class="stat-num" data-count="12">0</div>
-        <div class="stat-label">Awards Won</div>
       </div>
     </div>
   </div>

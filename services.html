@@ -1811,24 +1811,28 @@
     }
 
     .client-card {
-      flex: 0 0 auto;
-      min-width: 140px;
+      flex: 0 0 170px;
+      width: 170px;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 18px;
-      padding: 32px 20px;
+      padding: 32px 18px;
       background: linear-gradient(160deg, rgba(28, 61, 89, .4), rgba(8, 15, 24, .6));
       border: 1px solid rgba(77, 255, 243, .08);
       border-radius: 20px;
-      transition: transform .4s var(--ease), border-color .4s, background .4s;
+      transition: transform .4s var(--ease), border-color .4s, background .4s, box-shadow .4s;
       text-align: center;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
     }
 
     .client-card:hover {
       transform: translateY(-6px);
-      border-color: rgba(77, 255, 243, .22);
+      border-color: rgba(77, 255, 243, .28);
       background: linear-gradient(160deg, rgba(28, 61, 89, .6), rgba(8, 15, 24, .75));
+      box-shadow: 0 12px 30px rgba(0, 0, 0, .4);
     }
 
     .client-logo-wrap {
@@ -1845,13 +1849,38 @@
       font-weight: 600;
       color: var(--aqua);
       letter-spacing: .05em;
-      transition: background .4s, border-color .4s;
+      transition: background .4s, border-color .4s, box-shadow .4s;
       flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .client-logo-wrap.has-img {
+      background: #ffffff;
+      border-color: rgba(255, 255, 255, .3);
+      padding: 8px;
+    }
+
+    .client-logo-wrap.has-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      transition: transform .4s var(--ease);
     }
 
     .client-card:hover .client-logo-wrap {
       background: rgba(77, 255, 243, .14);
       border-color: var(--aqua);
+    }
+
+    .client-card:hover .client-logo-wrap.has-img {
+      background: #ffffff;
+      border-color: var(--aqua);
+      box-shadow: 0 0 16px rgba(77, 255, 243, .3);
+    }
+
+    .client-card:hover .client-logo-wrap.has-img img {
+      transform: scale(1.08);
     }
 
     .client-name {
@@ -2427,53 +2456,57 @@
     <div class="clients-carousel-wrap" id="clientsCarouselWrap">
       <div class="clients-track" id="clientsTrack">
 
-        <div class="client-card">
-          <div class="client-logo-wrap">LL</div>
-          <span class="client-name">Luminara Lifestyle</span>
+        <a href="https://aulilifestyle.com/" target="_blank" rel="noopener noreferrer" class="client-card">
+          <div class="client-logo-wrap has-img">
+            <img src="websiteAssets/client-logos/auli.png" alt="Auli Active Ayurveda Logo" loading="lazy">
+          </div>
+          <span class="client-name">Auli Active Ayurveda</span>
+          <span class="client-industry">Ayurveda &amp; Wellness</span>
+        </a>
+
+        <a href="https://theprimeavenues.com/" target="_blank" rel="noopener noreferrer" class="client-card">
+          <div class="client-logo-wrap has-img">
+            <img src="websiteAssets/client-logos/prime-avenues.jpeg" alt="The Prime Avenues Logo" loading="lazy">
+          </div>
+          <span class="client-name">The Prime Avenues</span>
+          <span class="client-industry">Real Estate &amp; Living</span>
+        </a>
+
+        <a href="https://www.mywishcare.com/?srsltid=AU7gw4X15-LxPzmGHhgPwEtAyWn6rUF-1VsBGvhnJC-OAP-tys3TNucG" target="_blank" rel="noopener noreferrer" class="client-card">
+          <div class="client-logo-wrap has-img">
+            <img src="websiteAssets/client-logos/wishcare.png" alt="WishCare Logo" loading="lazy">
+          </div>
+          <span class="client-name">WishCare</span>
+          <span class="client-industry">Clean Beauty &amp; Care</span>
+        </a>
+
+        <a href="https://www.dunkelbraun.com/" target="_blank" rel="noopener noreferrer" class="client-card">
+          <div class="client-logo-wrap has-img">
+            <img src="websiteAssets/client-logos/dunkelbraun.png" alt="Dunkel Braun Logo" loading="lazy">
+          </div>
+          <span class="client-name">Dunkel Braun</span>
+          <span class="client-industry">Bakery &amp; Cafe</span>
+        </a>
+
+        <a href="https://www.himalyaholdall.com/" target="_blank" rel="noopener noreferrer" class="client-card">
+          <div class="client-logo-wrap has-img">
+            <img src="websiteAssets/client-logos/himalya.jpg" alt="Himalya Holdall Co. Logo" loading="lazy">
+          </div>
+          <span class="client-name">HIMALYA HOLDALL CO.</span>
+          <span class="client-industry">Bags &amp; Travel Gear</span>
+        </a>
+
+        <a href="https://www.drapedivine.com/" target="_blank" rel="noopener noreferrer" class="client-card">
+          <div class="client-logo-wrap">DD</div>
+          <span class="client-name">Drape Divine</span>
           <span class="client-industry">Fashion &amp; Apparel</span>
-        </div>
+        </a>
 
-        <div class="client-card">
-          <div class="client-logo-wrap">NX</div>
-          <span class="client-name">Nexora Digital</span>
-          <span class="client-industry">Technology</span>
-        </div>
-
-        <div class="client-card">
-          <div class="client-logo-wrap">AH</div>
-          <span class="client-name">Aurum Hospitality</span>
-          <span class="client-industry">Hotels &amp; Dining</span>
-        </div>
-
-        <div class="client-card">
-          <div class="client-logo-wrap">VS</div>
-          <span class="client-name">Veda &amp; Sol</span>
-          <span class="client-industry">Wellness &amp; Beauty</span>
-        </div>
-
-        <div class="client-card">
-          <div class="client-logo-wrap">CR</div>
-          <span class="client-name">Circa Republic</span>
-          <span class="client-industry">F&amp;B &amp; Events</span>
-        </div>
-
-        <div class="client-card">
-          <div class="client-logo-wrap">MV</div>
-          <span class="client-name">Maeva Couture</span>
-          <span class="client-industry">Luxury Fashion</span>
-        </div>
-
-        <div class="client-card">
-          <div class="client-logo-wrap">ZP</div>
-          <span class="client-name">Zenpath Studios</span>
-          <span class="client-industry">Media &amp; Entertainment</span>
-        </div>
-
-        <div class="client-card">
-          <div class="client-logo-wrap">OB</div>
-          <span class="client-name">Orbit Collective</span>
-          <span class="client-industry">Creative Agency</span>
-        </div>
+        <a href="https://www.instagram.com/hyggekolkata/?hl=en" target="_blank" rel="noopener noreferrer" class="client-card">
+          <div class="client-logo-wrap">HK</div>
+          <span class="client-name">Hygge Kolkata</span>
+          <span class="client-industry">Cafe &amp; Dining</span>
+        </a>
 
       </div>
     </div>
@@ -2904,7 +2937,7 @@
       if (!wrap || !track) return;
 
       const cards = Array.from(track.querySelectorAll('.client-card'));
-      const total = cards.length; // 8 brands
+      const total = cards.length; // 7 brands
 
       /* How many cards are visible at once */
       function visibleCount() {
