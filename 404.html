@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>404 — Page Not Found | Motion Media Circle</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="robots" content="noindex, follow" />
+  <meta name="theme-color" content="#080F18" />
+  <link rel="icon" type="image/svg+xml" href="websiteAssets/Logo/Motion Media Logo new.svg" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --aqua:   #4DFFF3;
+      --teal:   #1E7F7A;
+      --navy:   #1C3D59;
+      --deep:   #080F18;
+      --mid:    #0D1E2E;
+      --ease:   cubic-bezier(0.4, 0, 0.2, 1);
+      --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    *, *::before, *::after {
+      margin: 0; padding: 0; box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+      background: var(--deep);
+      color: #fff;
+      line-height: 1.7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Noise texture */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.032;
+      pointer-events: none;
+      z-index: 500;
+    }
+
+    /* Page transition */
+    .page-exit {
+      position: fixed; inset: 0; background: #000; z-index: 1000;
+      transform: scaleY(0); transform-origin: bottom;
+      transition: transform .45s var(--ease);
+    }
+    .page-exit.active { transform: scaleY(1); }
+
+    /* Header */
+    .header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      padding: 22px 56px;
+      display: flex; justify-content: space-between; align-items: center;
+      -webkit-backdrop-filter: blur(18px) saturate(1.4);
+      backdrop-filter: blur(18px) saturate(1.4);
+      background: rgba(8, 15, 24, 0.75);
+      border-bottom: 1px solid rgba(77, 255, 243, 0.06);
+    }
+    .logo {
+      font-size: 15px; letter-spacing: .18em; color: #fff; text-decoration: none;
+      text-transform: uppercase; font-weight: 400;
+    }
+    .logo span { color: var(--aqua); }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--aqua); text-decoration: none; padding: 8px 16px;
+      border-radius: 999px; border: 1px solid rgba(77, 255, 243, 0.2);
+      background: rgba(77, 255, 243, 0.05);
+      transition: background .3s, transform .3s var(--ease), border-color .3s;
+    }
+    .back-btn:hover {
+      background: rgba(77, 255, 243, 0.15);
+      border-color: rgba(77, 255, 243, 0.4);
+      transform: translateX(-3px);
+    }
+    .back-btn svg { width: 14px; height: 14px; stroke: currentColor; }
+
+    /* 404 Main Stage */
+    .error-hero {
+      position: relative;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 140px 24px 80px;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    /* Ambient Orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(120px);
+    }
+    .orb-1 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(77, 255, 243, 0.12), transparent 70%);
+      top: 20%; left: 50%; transform: translateX(-50%);
+    }
+    .orb-2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(30, 127, 122, 0.15), transparent 70%);
+      bottom: 10%; right: 20%;
+    }
+
+    .error-card {
+      position: relative;
+      z-index: 2;
+      max-width: 680px;
+      padding: 60px 48px;
+      border-radius: 28px;
+      background: linear-gradient(160deg, rgba(28, 61, 89, 0.45), rgba(8, 15, 24, 0.7));
+      border: 1px solid rgba(77, 255, 243, 0.12);
+      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+    }
+
+    .error-code {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(80px, 14vw, 140px);
+      line-height: 0.9;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.9);
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #fff 30%, var(--aqua) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .error-subtitle {
+      font-size: 12px;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--aqua);
+      margin-bottom: 20px;
+    }
+
+    .error-desc {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.75);
+      line-height: 1.8;
+      max-width: 520px;
+      margin: 0 auto 36px;
+    }
+
+    .error-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 32px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--aqua), var(--teal));
+      color: var(--deep);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: transform .3s var(--spring), box-shadow .3s var(--ease);
+      box-shadow: 0 10px 30px rgba(77, 255, 243, 0.2);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 40px rgba(77, 255, 243, 0.35);
+    }
+
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 30px;
+      border-radius: 999px;
+      background: transparent;
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      font-weight: 400;
+      font-size: 12px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: border-color .3s, color .3s, background .3s;
+    }
+    .btn-outline:hover {
+      border-color: var(--aqua);
+      color: var(--aqua);
+      background: rgba(77, 255, 243, 0.05);
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 28px 24px;
+      border-top: 1px solid rgba(77, 255, 243, 0.06);
+      font-size: 12px;
+      letter-spacing: .1em;
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    @media (max-width: 640px) {
+      .header { padding: 16px 20px; }
+      .error-hero { padding: 110px 16px 60px; }
+      .error-card { padding: 40px 24px; }
+      .btn-primary, .btn-outline { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-exit" id="pageExit"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <a href="index.html" class="logo" data-exit>Motion <span>Media</span> Circle</a>
+    <a href="index.html" class="back-btn" data-exit>
+      <svg viewBox="0 0 16 16" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M13 8H3M7 4l-4 4 4 4" />
+      </svg>
+      <span>Back to Home</span>
+    </a>
+  </header>
+
+  <!-- Hero -->
+  <main class="error-hero">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="error-card">
+      <div class="error-code">404</div>
+      <div class="error-subtitle">Out of Frame · Page Not Found</div>
+      <p class="error-desc">
+        The frame or sequence you're looking for does not exist in our current reel, or has been moved to a new destination.
+      </p>
+      <div class="error-actions">
+        <a href="index.html" class="btn-primary" data-exit>Return to Studio</a>
+        <a href="services.html" class="btn-outline" data-exit>Explore Services</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    © 2026 Motion Media Circle. All rights reserved.
+  </footer>
+
+  <script>
+    const pageExit = document.getElementById('pageExit');
+    document.querySelectorAll('[data-exit]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const h = a.getAttribute('href');
+        pageExit.classList.add('active');
+        setTimeout(() => location.href = h, 460);
+      });
+    });
+  </script>
+</body>
+</html>

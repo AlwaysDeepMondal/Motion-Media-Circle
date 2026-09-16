@@ -1,0 +1,32 @@
+# ═════════════════════════════════════════════════════════════════
+# MOTION MEDIA CIRCLE — robots.txt
+# Website: https://motionmediacircle.com
+# ═════════════════════════════════════════════════════════════════
+
+User-agent: *
+Allow: /
+Disallow: /websiteAssets/done.txt
+Disallow: /websiteAssets/test.txt
+Disallow: /.git/
+
+# AI Search & Crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Sitemap Location
+Sitemap: https://motionmediacircle.com/sitemap.xml
